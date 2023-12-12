@@ -88,6 +88,12 @@
     <div class="Home">
         <div class="container">
             <h1>Weather or Not</h1>
+            
+            {% if error_message %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error_message }}
+                </div>
+            {% endif %}
             <form action="/weather" method="post">
                 <label for="city">City:</label>
                 <input type="text" id="city" name="city" class="form-control" required />

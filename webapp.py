@@ -19,11 +19,13 @@ def index():
 def weather():
     city = request.form['city']
     state = request.form['state']
+    
     try:
         weather_data = get_weather(city, state)
-        return render_template('weather.html', city=city, state=state, **weather_data)
+        return render_template('weather.html', city=city, state=state, **weather_data, error_message=None)
     except Exception as e:
-        return render_template('error.html', error=str(e))
+        error_message = "Please enter a valid city and state."
+        return render_template('index.html', error_message=error_message)
 
 #THE Weather function.
 
