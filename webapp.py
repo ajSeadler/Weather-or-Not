@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 import requests
 from datetime import datetime
-import pytz  # Import the pytz module
+import pytz  #for CT time zone
 
 app = Flask(__name__)
 
@@ -25,7 +25,7 @@ def weather():
     except Exception as e:
         return render_template('error.html', error=str(e))
 
-# ... (your existing code)
+#THE Weather function.
 
 def get_weather(city, state):
     api_key = '4633100f3428272436e88b4f6a488c7f'
