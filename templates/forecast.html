@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Add necessary styles or link to Bootstrap if not already linked -->
+    <title>5-Day Forecast</title>
+</head>
+<body>
+    <h1>5-Day Forecast</h1>
+    <p class="lead">Location: {{ city }}, {{ state }}</p>
+
+    {% for entry in forecast_data %}
+        <div class="forecast-entry">
+            <p class="lead">Time: {{ entry['time'] }}</p>
+            <p class="lead">Temperature: {{ "%.1f" | format(entry['temperature_f']) }}°F</p>
+            <p class="lead">Weather: {{ entry['weather_description'] }}</p>
+            <p class="lead">Rainfall: {{ "%.1f" | format(entry['precipitation_rain']) }} mm (rain)</p>
+            <p class="lead">Snowfall: {{ "%.1f" | format(entry['precipitation_snow']) }} mm (snow)</p>
+        </div>
+    {% endfor %}
+
+    <!-- Add a link to go back to the weather information -->
+    <a href="{{ url_for('weather', city=city, state=state) }}" class="btn btn-secondary">Back to Weather</a>
+</body>
+</html>
