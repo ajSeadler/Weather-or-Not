@@ -18,148 +18,171 @@
     <!-- Add your custom styles here -->
     <style>
       body {
-          margin: 0;
-          padding: 0;
-          font-family: 'Roboto', sans-serif;
-          background-image: url("https://img.freepik.com/free-photo/sky-clouds-background_1127-3837.jpg?w=1380&t=st=1702427989~exp=1702428589~hmac=b25e3de6f4e2e40941f1335f3fa85b85542fdd0fe89b3f6c6c20ac4f35c36346");
-          background-size: cover;
-          background-position: center;
-          background-repeat: no-repeat;
-          height: 100vh;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+        background-image: url("https://img.freepik.com/free-photo/sky-clouds-background_1127-3837.jpg?w=1380&t=st=1702427989~exp=1702428589~hmac=b25e3de6f4e2e40941f1335f3fa85b85542fdd0fe89b3f6c6c20ac4f35c36346");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
       }
 
       header {
-            background: linear-gradient(135deg, #2980b9, #2c3e50);
-            color: white;
-            padding: 15px;
-            width: 100%;
-            position: fixed;
-            top: 0;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        background: linear-gradient(135deg, #2980b9, #2c3e50);
+        color: white;
+        padding: 15px;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        z-index: 1000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
 
-        .header-title {
-            font-size: 1.5em;
-            margin-bottom: 5px;
-        }
+      header a {
+        color: #ffffff; /* White color */
+        text-decoration: none;
+        margin: 0 10px;
+        font-weight: bold;
+        font-size: 1.1rem;
+        transition: color 0.3s ease; /* Smooth color transition */
+      }
 
-        .header-info {
-            font-size: 1em;
-            display: none;
-        }
+      .header-icon {
+        font-size: 1.5em;
+        margin-right: 10px;
+      }
 
-        .header-icon {
-            font-size: 1.5em;
-            margin-right: 10px;
-        }
+      .header-title {
+        font-size: 1.5em;
+        margin-bottom: 5px;
+        flex-grow: 1; /* This allows "Weather Or Not" to take the remaining space in the middle */
+        text-align: center; /* Center the text */
+      }
+
+      .title {
+        color: whitesmoke;
+        padding: 15px;
+        animation: fadeInUp 2s ease;
+      }
+
+      .city-state {
+        background-color: #5d5d5da8; /* Set the background color to grey */
+        padding: 10px; /* Adjust padding as needed */
+        border-radius: 8px; /* Optional: Add border-radius for rounded corners */
+        margin-top: 10px; /* Optional: Add margin for spacing */
+      }
 
       .main-container {
-          background-color: rgba(255, 255, 255, 0.563);
-          border-radius: 15px;
-          padding: 20px;
-          box-shadow: 0 0 10px #0000001a;
-          /* margin-top: 20px; */
-          max-width: 500px;
-          animation: fadeIn 1s ease;
+        background-color: rgba(255, 255, 255, 0.563);
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 0 10px #0000001a;
+        /* margin-top: 20px; */
+        max-width: 500px;
+        animation: fadeIn 1s ease;
+      }
+
+      .form-container h3 {
+        color: #333;
       }
 
       .current-weather-container {
         background-color: rgba(41, 127, 185, 0.362);
-    color: whitesmoke;
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 0 10px #0000001a;
-    margin-bottom: 20px;
-    max-width: 500px;
-    text-align: center;
-}
-
+        color: whitesmoke;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 0 10px #0000001a;
+        margin-bottom: 20px;
+        max-width: 500px;
+        text-align: center;
+        animation: fadeInUp 2s ease;
+      }
 
       .weather-icon {
-          font-size: 3em;
+        font-size: 3em;
       }
 
       .weather-info {
-        font-size: .8rem;
+        font-size: 0.8rem;
       }
 
       .temperature {
-          font-size: 2em;
-          font-weight: bold;
-          margin-top: 10px;
+        font-size: 2em;
+        font-weight: bold;
+        margin-top: 10px;
       }
 
       .form-container {
-          background-color: rgba(255, 255, 255, 0.9);
-          border-radius: 15px;
-          padding: 20px;
-          box-shadow: 0 0 10px #0000001a;
-          max-width: 500px;
-          animation: fadeInUp 1s ease;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 0 10px #0000001a;
+        max-width: 500px;
+        animation: fadeInUp 2s ease;
       }
 
       form {
-          text-align: center;
+        text-align: left;
       }
 
       label {
-          display: block;
-          margin-bottom: 8px;
-          color: #000;
+        display: block;
+        margin-bottom: 8px;
+        color: #000;
       }
 
       input {
-          width: 100%;
-          padding: 8px;
-          margin-bottom: 16px;
-          box-sizing: border-box;
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 16px;
+        box-sizing: border-box;
       }
 
       button {
-          background-color: #007bff;
-          color: #ffffff;
-          padding: 10px 15px;
-          border: none;
-          border-radius: 4px;
-          cursor: pointer;
-          transition: background-color 0.3s ease;
+        background-color: #007bff;
+        color: #ffffff;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
       }
 
       button:hover {
-          background-color: #0056b3;
+        background-color: #0056b3;
       }
 
-      .head h1 {
-          font-size: 2em;
-          color: black;
-          margin-bottom: 20px;
+      .head p {
+        font-size: 1.1rem;
+        color: black;
+        margin-bottom: 20px;
       }
 
       @keyframes fadeIn {
-          from {
-              opacity: 0;
-          }
-          to {
-              opacity: 1;
-          }
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
       }
 
       @keyframes fadeInUp {
-          from {
-              opacity: 0;
-              transform: translateY(20px);
-          }
-          to {
-              opacity: 1;
-              transform: translateY(0);
-          }
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
       @media (max-width: 576px) {
         .header-info {
@@ -183,7 +206,7 @@
         }
 
         .main-container {
-            width: 90%;
+          width: 90%;
         }
 
         .current-weather-container,
@@ -198,40 +221,57 @@
 
   <body>
     <header>
-        <div>
-            <span class="header-icon">&#9728;</span>
-        </div>
-        <div>
-            <span class="header-icon">&#9790;</span>
-        </div>
-    </header>
-    
-    <div class="main-container">
-      <div class="head">
-        <h1></h1>
+      <div class="header-icon">
+        <i class="wi wi-day-sunny"></i>
+        <a href="/">Home</a>
       </div>
-      <div class="current-weather-container">
-        {% if current_weather %}
-        <div class="current-wea">
-            {% if current_weather %}
-                <div class="weather-info">
-                    <h3>Current Weather in: {{ current_weather.city }}, {{ current_weather.state }}</h3>
-                    <p class="weather-icon">
-                        <i class="{{ current_weather.weather_icon }}"></i>
-                    </p>
-                    <p class="temperature">
-                        {{ current_weather.temperature_f | round(0, 'floor') }} °F
-                    </p>
-                </div>
-            {% endif %}
-        </div>
+  
+      <!-- <div class="header-title">Weather Or Not</div> -->
+      <div class="header-icon">
+  
+        <a href="/about">About</a>
         
+  
+        <i class="wi wi-rain"></i>
+      </div>
+    </header>
+    <!-- <div class="title"><h1>Weather or Not</h1></div> -->
+
+    <div class="current-weather-container">
+      {% if current_weather %}
+      <div class="current-wea">
+        {% if current_weather %}
+        <div class="weather-info">
+          <h3>Current Weather in:</h3>
+          <h4 class="city-state">
+            {{ current_weather.city }}, {{ current_weather.state }}
+          </h4>
+          <p class="weather-icon">
+            <i class="{{ current_weather.weather_icon }}"></i>
+          </p>
+          <p class="temperature">
+            <i class="wi wi-thermometer"></i> {{ current_weather.temperature_f
+            }}°F
+          </p>
+
+          <p class="current-time">{{ current_weather.current_time }}</p>
+        </div>
+
+        <!-- <div class="main-container">
+      <div class="head">
+        <p>Search weather forecasts below by entering the city and state.</p>
+      </div>
+     
+            {% endif %}
+        </div> -->
+
         {% endif %}
       </div>
       <div class="form-container">
         {% if error_message %}
         <div class="alert alert-danger" role="alert">{{ error_message }}</div>
         {% endif %}
+        <h3>Search</h3>
 
         <form action="/weather" method="post">
           <label for="city">City:</label>
