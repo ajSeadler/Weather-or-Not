@@ -1,110 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather Or Not</title>
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-    
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Weather Icons CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css"
+    />
     <!-- Add your custom styles here -->
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
+      body {
+          margin: 0;
+          padding: 0;
+          font-family: 'Roboto', sans-serif;
+          background-image: url("https://img.freepik.com/free-photo/sky-clouds-background_1127-3837.jpg?w=1380&t=st=1702427989~exp=1702428589~hmac=b25e3de6f4e2e40941f1335f3fa85b85542fdd0fe89b3f6c6c20ac4f35c36346");
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          height: 100vh;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+      }
 
-        .container {
-            background-color: rgba(248, 249, 250, 0.7);
-            border-radius: 15px; /* Rounded edges */
-            padding: 20px; /* Padding inside the container */
-            box-shadow: 0 0 10px #0000001a;
-            margin: 50px auto; /* Center the container */
-            max-width: 500px; /* Set maximum width */
-        }
-
-        @media (max-width: 576px) {
-            .container {
-                max-width: 90%;
-                margin-bottom: 105%; /* Full width on small screens */
-                padding: 15px; /* Adjust padding for small screens */
-            }
-        }
-
-        h1 {
-            color: #333;
-            text-align: center;
-            margin: 3%;
-        }
-
-        .Home {
-            background-image: url('https://images.pexels.com/photos/167699/pexels-photo-167699.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        form {
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        input {
+      header {
+            background: linear-gradient(135deg, #2980b9, #2c3e50);
+            color: white;
+            padding: 15px;
             width: 100%;
-            padding: 8px;
-            margin-bottom: 16px;
-            box-sizing: border-box;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        button {
-            background-color: #007bff;
-            color: #ffffff;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
+        .header-title {
+            font-size: 1.5em;
+            margin-bottom: 5px;
         }
 
-        button:hover {
-            background-color: #0056b3;
+        .header-info {
+            font-size: 1em;
+            display: none;
         }
+
+        .header-icon {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+
+      .main-container {
+          background-color: rgba(255, 255, 255, 0.563);
+          border-radius: 15px;
+          padding: 20px;
+          box-shadow: 0 0 10px #0000001a;
+          margin-top: 20px;
+          max-width: 500px;
+          animation: fadeIn 1s ease;
+      }
+
+      .current-weather-container {
+        background-color: rgba(41, 127, 185, 0.362);
+    color: whitesmoke;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 0 10px #0000001a;
+    margin-bottom: 20px;
+    max-width: 500px;
+    text-align: center;
+}
+
+
+      .weather-icon {
+          font-size: 3em;
+      }
+
+      .weather-info {
+        font-size: .8rem;
+      }
+
+      .temperature {
+          font-size: 2em;
+          font-weight: bold;
+          margin-top: 10px;
+      }
+
+      .form-container {
+          background-color: rgba(255, 255, 255, 0.9);
+          border-radius: 15px;
+          padding: 20px;
+          box-shadow: 0 0 10px #0000001a;
+          max-width: 500px;
+          animation: fadeInUp 1s ease;
+      }
+
+      form {
+          text-align: center;
+      }
+
+      label {
+          display: block;
+          margin-bottom: 8px;
+          color: #000;
+      }
+
+      input {
+          width: 100%;
+          padding: 8px;
+          margin-bottom: 16px;
+          box-sizing: border-box;
+      }
+
+      button {
+          background-color: #007bff;
+          color: #ffffff;
+          padding: 10px 15px;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+          background-color: #0056b3;
+      }
+
+      .head h1 {
+          font-size: 2em;
+          color: black;
+          margin-bottom: 20px;
+      }
+
+      @keyframes fadeIn {
+          from {
+              opacity: 0;
+          }
+          to {
+              opacity: 1;
+          }
+      }
+
+      @keyframes fadeInUp {
+          from {
+              opacity: 0;
+              transform: translateY(20px);
+          }
+          to {
+              opacity: 1;
+              transform: translateY(0);
+          }
+      }
+      @media (max-width: 576px) {
+        .header-info {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+        }
+
+        .header-icon {
+          margin-right: 0;
+        }
+
+        .header-info {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+        }
+
+        .header-info {
+          font-size: 0.8em;
+        }
+
+        .main-container {
+            width: 90%;
+        }
+
+        .current-weather-container,
+        .form-container {
+          max-width: 90%;
+          margin-left: auto;
+          margin-right: auto;
+        }
+      }
     </style>
-</head>
+  </head>
 
-<body>
-    <div class="Home">
-        <div class="container">
-            <h1>Weather or Not</h1>
-            
-            {% if error_message %}
-                <div class="alert alert-danger" role="alert">
-                    {{ error_message }}
+  <body>
+    <header>
+        <div>
+            <span class="header-icon">&#9728;</span>
+        </div>
+        <div>
+            <span class="header-icon">&#9790;</span>
+        </div>
+    </header>
+    
+    <div class="main-container">
+      <div class="head">
+        <h1></h1>
+      </div>
+      <div class="current-weather-container">
+        {% if current_weather %}
+        <div class="current-wea">
+            {% if current_weather %}
+                <div class="weather-info">
+                    <h3>Current Weather in: {{ current_weather.city }}, {{ current_weather.state }}</h3>
+                    <p class="weather-icon">
+                        <i class="{{ current_weather.weather_icon }}"></i>
+                    </p>
+                    <p class="temperature">
+                        {{ current_weather.temperature_f | round(0, 'floor') }} °F
+                    </p>
                 </div>
             {% endif %}
-            <form action="/weather" method="post">
-                <label for="city">City:</label>
-                <input type="text" id="city" name="city" class="form-control" required />
-                <label for="state">State:</label>
-                <input type="text" id="state" name="state" class="form-control" required />
-                <button type="submit" class="btn btn-primary">Get Weather</button>
-            </form>
         </div>
+        
+        {% endif %}
+      </div>
+      <div class="form-container">
+        {% if error_message %}
+        <div class="alert alert-danger" role="alert">{{ error_message }}</div>
+        {% endif %}
+
+        <form action="/weather" method="post">
+          <label for="city">City:</label>
+          <input
+            type="text"
+            id="city"
+            name="city"
+            class="form-control"
+            required
+          />
+          <label for="state">State:</label>
+          <input
+            type="text"
+            id="state"
+            name="state"
+            class="form-control"
+            required
+          />
+          <button type="submit" class="btn btn-primary">Get Weather</button>
+        </form>
+      </div>
     </div>
     <!-- Bootstrap JS (optional, if you need Bootstrap functionality) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
+    <footer
+      class="fixed-bottom"
+      style="
+        background: rgba(255, 255, 255, 0.221);
+        backdrop-filter: blur(10px);
+        padding: 20px;
+        text-align: center;
+      "
+    >
+      <p style="margin: 0">Built with Flask, Python, and Bootstrap</p>
+      <p style="margin: 0">&copy; 2023 Anthony Seadler</p>
+    </footer>
+  </body>
 </html>
