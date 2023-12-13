@@ -77,7 +77,7 @@ def get_weather(city, state):
     data = response.json()
 
     if response.status_code == 200:
-        weather = data['weather'][0]['description']
+        weather = data['weather'][0]['description'].title()
         temperature_k = data['main']['temp']
         temperature_f = kelvin_to_fahrenheit(temperature_k)
         precipitation_rain = data.get('rain', {}).get('1h', 0)
