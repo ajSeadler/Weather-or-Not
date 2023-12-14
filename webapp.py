@@ -19,6 +19,8 @@ def kelvin_to_fahrenheit(kelvin):
 def mps_to_mph(mps):
     return round(mps * 2.23694, 1)
 
+
+
 def get_location_time_zone(city, state):
     geolocator = Nominatim(user_agent="your_app_name")
     location = geolocator.geocode(f"{city}, {state}")
@@ -60,6 +62,68 @@ def get_current_weather():
 
     return None
 
+# Import necessary libraries
+from datetime import datetime
+
+def get_8_day_forecast(city, state):
+    api_key = '4633100f3428272436e88b4f6a488c7f'
+    base_url = 'http://api.openweathermap.org/data/2.5/forecast'
+
+    params = {
+        'q': f'{city},{state}',
+        'appid': api_key,
+    }
+
+    response = requests.get(base_url, params=params)
+    data = response.json()
+
+    if response.status_code == 200:
+        forecast_data = []
+        unique_dates = set()
+
+        for item in data.get('list', []):
+            timestamp = item['dt']
+            forecast_utc = datetime.utcfromtimestamp(timestamp)
+            
+            # Extracting day of the week, month, and date
+            formatted_day = forecast_utc.strftime('%A, %b %d')
+
+            # Only include data for the next 8 unique dates
+            if formatted_day not in unique_dates and len(forecast_data) < 8:
+                temperature_k = item['main']['temp']
+                temperature_f = round(kelvin_to_fahrenheit(temperature_k))
+                weather_description = item['weather'][0]['description'].title()
+
+                # Append forecast data to the list
+                forecast_data.append({
+                    'formatted_day': formatted_day,
+                    'temperature_f': temperature_f,
+                    'weather_description': weather_description,
+                })
+
+                # Add the formatted day to the set of unique dates
+                unique_dates.add(formatted_day)
+
+        return forecast_data
+    else:
+        # Handle API errors
+        error_message = f'Error: {response.status_code}, {data.get("message", "No message provided")}'
+        raise Exception(error_message)
+
+
+@app.route('/forecast')
+def forecast():
+    city = 'Oklahoma City'  # You can customize this based on user input
+    state = 'Oklahoma'      # You can customize this based on user input
+
+    try:
+        forecast_data = get_8_day_forecast(city, state)
+        return render_template('forecast.html', city=city, state=state, forecast_data=forecast_data)
+    except Exception as e:
+        error_message = "Error fetching forecast. Please try again later."
+        return render_template('index.html', error_message=error_message)
+
+    
 
 @app.route('/')
 def index():
@@ -81,6 +145,8 @@ def weather():
     except Exception as e:
         error_message = "Please enter a valid city and state."
         return render_template('index.html', error_message=error_message)
+
+    
 
 # THE Weather function.
 def get_weather(city, state):

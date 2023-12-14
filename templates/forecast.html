@@ -1,24 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <!-- Add necessary styles or link to Bootstrap if not already linked -->
-    <title>5-Day Forecast</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8-Day Forecast</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css">
+    <!-- Add your custom styles here -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            background-image: url("https://images.pexels.com/photos/209831/pexels-photo-209831.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2980b9, #2c3e50);
+            color: white;
+            padding: 15px;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .header-icon {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+
+        .header-title {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: row;
+            width: 17rem;
+            margin: 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 0 10px #0000001a;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .card-icon {
+            font-size: 1.2rem;
+            color: grey; /* Set the color to grey */
+            margin-bottom: 10px;
+        }
+
+        .card-text {
+            font-size: 1.2rem;
+        }
+        .current-weather-container {
+        background-color: rgba(41, 127, 185, 0.362);
+        color: whitesmoke;
+        border-radius: 15px;
+        max-width: 90%;
+        padding: 20px;
+        box-shadow: 0 0 10px #0000001a;
+        margin-bottom: 20px;
+        text-align: center;
+        animation: fadeInUp 2s ease;
+      }
+
+      .temp {
+        font-size: 2.8rem;
+      }
+    </style>
 </head>
+
 <body>
-    <h1>5-Day Forecast</h1>
-    <p class="lead">Location: {{ city }}, {{ state }}</p>
-
-    {% for entry in forecast_data %}
-        <div class="forecast-entry">
-            <p class="lead">Time: {{ entry['time'] }}</p>
-            <p class="lead">Temperature: {{ "%.1f" | format(entry['temperature_f']) }}°F</p>
-            <p class="lead">Weather: {{ entry['weather_description'] }}</p>
-            <p class="lead">Rainfall: {{ "%.1f" | format(entry['precipitation_rain']) }} mm (rain)</p>
-            <p class="lead">Snowfall: {{ "%.1f" | format(entry['precipitation_snow']) }} mm (snow)</p>
+    <header>
+        <div class="header-icon">
+            <i class="wi wi-day-sunny"></i>
+            <a href="/">Home</a>
+            <a href="/forecast">Forecast</a>
         </div>
-    {% endfor %}
 
-    <!-- Add a link to go back to the weather information -->
-    <a href="{{ url_for('weather', city=city, state=state) }}" class="btn btn-secondary">Back to Weather</a>
+        <div class="header-icon">
+            <a href="/about">About</a>
+            <i class="wi wi-rain"></i>
+        </div>
+    </header>
+<div class="current-weather-container">
+    <h1>8-Day Forecast for {{ city }}, {{ state }}</h1>
+
+    <div class="d-flex flex-wrap justify-content-center">
+        {% for forecast_entry in forecast_data %}
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text">
+                        <h5 class="card-title">
+                            {{ forecast_entry.formatted_day }}
+                        </h5>
+                        <i class="wi wi-thermometer" style="font-size: 2rem;"></i>
+                        <strong class="temp">{{ forecast_entry.temperature_f }}°F</strong>
+                    </p>
+                    
+                   
+                    <p class="card-text"> {% if 'cloud' in forecast_entry.weather_description.lower() %}
+                        <i class="fas fa-cloud card-icon"></i>
+                    {% elif 'rain' in forecast_entry.weather_description.lower() %}
+                        <i class="fas fa-cloud-showers-heavy card-icon"></i>
+                    {% elif 'snow' in forecast_entry.weather_description.lower() %}
+                        <i class="fas fa-snowflake card-icon"></i>
+                    {% elif 'clear' in forecast_entry.weather_description.lower() %}
+                        <i class="fas fa-sun card-icon"></i>
+                    {% else %}
+                        <i class="fas fa-question card-icon"></i>
+                    {% endif %}{{ forecast_entry.weather_description }} </p>
+                    
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+    <!-- Bootstrap JS (optional, if you need Bootstrap functionality) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

@@ -21,7 +21,7 @@
         margin: 0;
         padding: 0;
         font-family: sans-serif;
-        background-image: url("https://img.freepik.com/free-photo/sky-clouds-background_1127-3837.jpg?w=1380&t=st=1702427989~exp=1702428589~hmac=b25e3de6f4e2e40941f1335f3fa85b85542fdd0fe89b3f6c6c20ac4f35c36346");
+        background-image: url("https://images.pexels.com/photos/209831/pexels-photo-209831.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -148,6 +148,9 @@
       button {
         background-color: #007bff;
         color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         padding: 10px 15px;
         border: none;
         border-radius: 4px;
@@ -224,6 +227,7 @@
       <div class="header-icon">
         <i class="wi wi-day-sunny"></i>
         <a href="/">Home</a>
+        <a href="/forecast">Forecast</a>
       </div>
   
       <!-- <div class="header-title">Weather Or Not</div> -->
@@ -256,6 +260,7 @@
 
           <p class="current-time">{{ current_weather.current_time }}</p>
         </div>
+        
 
         <!-- <div class="main-container">
       <div class="head">
@@ -264,6 +269,7 @@
      
             {% endif %}
         </div> -->
+        
 
         {% endif %}
       </div>
