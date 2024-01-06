@@ -31,7 +31,7 @@ Weather or Not is a weather forecast app that provides users with the current we
 - Flask
 - Bootstrap 5
 
-## Getting Started
+## If You Want to Work On It!
 
 ### Prerequisites
 
