@@ -70,12 +70,12 @@
         .card {
             display: flex;
             flex-direction: row;
-            width: 17rem;
+            width: 13rem;
             margin: 10px;
             background-color: rgba(255, 255, 255, 0.9);
             border-radius: 15px;
             box-shadow: 0 0 10px #0000001a;
-            padding: 20px;
+            padding: 25px;
             text-align: center;
         }
 
@@ -98,10 +98,11 @@
         background-color: rgba(41, 127, 185, 0.362);
         color: whitesmoke;
         border-radius: 15px;
-        max-width: 90%;
+        max-width: 80%;
         padding: 20px;
         box-shadow: 0 0 10px #0000001a;
-        margin-bottom: 20px;
+        margin-top: 30vh;
+        margin-bottom: auto;
         text-align: center;
         animation: fadeInUp 2s ease;
       }
@@ -126,7 +127,7 @@
         </div>
     </header>
 <div class="current-weather-container">
-    <h1>8-Day Forecast for {{ city }}, {{ state }}</h1>
+    <h1>6-Day Forecast for {{ city }}, {{ state }}</h1>
 
     <div class="d-flex flex-wrap justify-content-center">
         {% for forecast_entry in forecast_data %}
