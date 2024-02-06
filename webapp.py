@@ -5,10 +5,14 @@ import pytz  # for CT time zone
 from geopy.geocoders import Nominatim
 import ssl
 
+# in the future i will find a way to make this code more managable but here it is for now. 
+
 # Disable SSL certificate verification for Geopy - I would never do this in the real world. Plus this site will never be live. 
 ssl._create_default_https_context = ssl._create_unverified_context
 
 app = Flask(__name__)
+
+
 
 def kelvin_to_celsius(kelvin):
     return kelvin - 273.15
@@ -35,10 +39,10 @@ def get_current_weather():
     api_key = '4633100f3428272436e88b4f6a488c7f'
     base_url = 'http://api.openweathermap.org/data/2.5/weather'
 
-    # Provide coordinates for Oklahoma City, Oklahoma
+    
     city = 'Oklahoma City'
     state = 'Oklahoma'
-    coordinates = '35.4676,-97.5164'  # Latitude, Longitude
+    coordinates = '35.4676,-97.5164' 
 
     params = {
         'q': f'{city},{state}',
@@ -57,8 +61,7 @@ def get_current_weather():
             'city': city,
             'state': state,
             'temperature_f': temperature_f,
-            'current_time': current_time,  # Include the current time
-        }
+            'current_time': current_time,          }
 
     return None
 
@@ -110,11 +113,11 @@ def get_8_day_forecast(city, state):
         error_message = f'Error: {response.status_code}, {data.get("message", "No message provided")}'
         raise Exception(error_message)
 
-
+# hard coded forecast location for now
 @app.route('/forecast')
 def forecast():
-    city = 'Oklahoma City'  # You can customize this based on user input
-    state = 'Oklahoma'      # You can customize this based on user input
+    city = 'Oklahoma City' 
+    state = 'Oklahoma'      
 
     try:
         forecast_data = get_8_day_forecast(city, state)
@@ -203,6 +206,8 @@ def get_weather(city, state):
         # Handle API errors
         error_message = f'Error: {response.status_code}, {data.get("message", "No message provided")}'
         raise Exception(error_message)
+    
+    
 
 if __name__ == '__main__':
     app.run(debug=True)
